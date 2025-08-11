@@ -35,33 +35,18 @@ public class StudentSpringTest {
 
     @Test
     public void testCourse() {
-        //assertNotNull(course);
-        System.out.println("Course Info:");
-        System.out.println("Course ID: " + course.getCourseId());
-        System.out.println("Course Name: " + course.getCourseName());
-        System.out.println("Average Score: " + course.getAverageScore());
-        System.out.println("Students:");
-        for (Student s : course.getStudents()) {
-            System.out.println(" - " + s);
-        }
-        double expectedTotal = (98 + 55 + 85) / 3.0;
+        assertNotNull(course);
+        
+        double expected = 79.33333333333333;
+        assertEquals(expected, course.getAverageScore());
     }
 
     @Test
     public void testGradeService() {
-        //assertNotNull(service);
-        System.out.println("GradeService Test:");
-
-        String studentId = "2026030102";
-        String grade = service.calculateGrade(studentId);
-        System.out.println("Student ID: " + studentId + " → Grade: " + grade);
-
-        int threshold = 80;
-        List<Student> highScorers = service.getHighScoreStudents(threshold);
-        System.out.println("Students with score ≥ " + threshold + ":");
-        for (Student s : highScorers) {
-            System.out.println(" - " + s);
-        }
+        assertNotNull(service);
+        
+        String expected = "F";
+        assertEquals(expected, service.calculateGrade("2026030102"));
     }
 
 }
