@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  setter injection -->
+<bean id="student1" class="mylab.student.di.xml.Student">
+	<property name="id" value="2026030101"/>
+	<property name="name" value="김민철"/>
+	<property name="score" value="98"/>
+</bean>
+
+<bean id="student2" class="mylab.student.di.xml.Student">
+	<constructor-arg value="2026030102"/>
+	<constructor-arg value="정윤종"/>
+	<constructor-arg value="55"/>
+</bean>
+
+<bean id="student3" class="mylab.student.di.xml.Student">
+	<constructor-arg value="2026030103"/>
+	<constructor-arg value="도재욱"/>
+	<constructor-arg value="85"/>
+</bean>
+
+<bean id="course" class="mylab.student.di.xml.Course">
+	<property name="students">
+		<list>
+			<ref bean="student1"/>
+			<ref bean="student2"/>
+			<ref bean="student3"/>
+		</list>
+	</property>
+</bean>
+
+
+
+<bean id="gradeService" class="mylab.student.di.xml.GradeService">
+	<property name="course" ref="course"/>
+</bean>
+</beans>
