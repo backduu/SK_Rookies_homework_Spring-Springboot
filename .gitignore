@@ -1,0 +1,6 @@
+﻿.settings
+*.classpath
+.project
+*.MF
+target
+pom.xml
