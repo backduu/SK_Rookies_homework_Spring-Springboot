@@ -1,41 +1,34 @@
 package mylab.order.di.xml;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.ContextConfiguration;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.*;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "classpath:mylab-order-di.xml")
 public class OrderSpringTest {
+    @Autowired
+    private ShoppingCart cart;
+
+    @Autowired
+    private OrderService orderService;
+
     @Test
-    void testShoppingCartTotalPrice() {
-        ShoppingCart cart = new ShoppingCart();
-
-        Product p1 = new Product("P001", "Keyboard", 49.99);
-        Product p2 = new Product("P002", "Mouse", 29.99);
-        Product p3 = new Product("P003", "Monitor", 199.99);
-        
-        cart.setProducts(Arrays.asList(p1, p2, p3));
-
-        double expectedTotal = 49.99 + 29.99 + 199.99;
-        assertEquals(expectedTotal, cart.getTotalPrice(), 0.001, "Total price should match sum of product prices");
+    public void testShoppingCart() {
+        double expectedTotal = 1800000 + 800000;
+        assertEquals(expectedTotal, cart.getTotalPrice());
     }
-    
+
     @Test
-    void testOrderServiceTotalPrice() {
-    	ShoppingCart cart = new ShoppingCart();
-        cart.setProducts(Arrays.asList(
-                new Product("P101", "Laptop", 999.99),
-                new Product("P102", "Charger", 49.99)
-        ));
-
-        OrderService orderService = new OrderService();
-        orderService.setShoppingCart(cart);
-
-        double expectedTotal = 999.99 + 49.99;
-        assertEquals(expectedTotal, orderService.calculateOrderTotal(), 0.001, "Order total should match cart total");
+    public void testOrderService() {
+        double expectedTotal = 1800000 + 800000;
+        assertEquals(expectedTotal, orderService.calculateOrderTotal());
     }
+
 }
